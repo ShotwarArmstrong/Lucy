@@ -26,6 +26,23 @@ const LS = {
   chat: "lucy_chat_v1",
   cfg:  "lucy_cfg_v1",
 };
+// ===== CONFIG (localStorage) =====
+function saveCfg(cfg) {
+  try {
+    localStorage.setItem(LS.cfg, JSON.stringify(cfg));
+  } catch (e) {
+    console.warn("Lucy: no se pudo guardar config");
+  }
+}
+
+function loadCfg() {
+  try {
+    const raw = localStorage.getItem(LS.cfg);
+    return raw ? JSON.parse(raw) : {};
+  } catch (e) {
+    return {};
+  }
+}
 
 const DEFAULT_CFG = {
   provider: "openai",
