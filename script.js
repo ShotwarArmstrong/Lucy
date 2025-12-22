@@ -152,11 +152,22 @@ async function onSend() {
 
   pushMsg("user", text);
 
-  // Basic guard
-  if (!state.cfg.apiKey) {
-    pushMsg("assistant", "Falta tu API Key. Tocá ⚙️ y pegala en Settings.");
-    return;
-  }
+ // Basic guard (fixed)
+const apiKey =
+  state.cfg.apiKey ||
+  localStorage.getItem("lucy_cfg_v1")
+    ? JSON.parse(localStorage.getItem("lucy_cfg_v1"))?.apiKey
+    : "";
+
+if (!apiKey) {
+  pushMsg(
+    "assistant",
+    "Falta tu API Key. Tocá ⚙️ y pegala en Settings."
+  );
+  return;
+}
+
+state.cfg.apiKey = apiKey;
 
   // Call model
   const thinkingId = pushMsg("assistant", "…");
