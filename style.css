@@ -1,83 +1,150 @@
-<!doctype html>
-<html lang="es">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Lucy</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <header class="topbar">
-    <h1>Lucy</h1>
-    <button id="btnSettings" class="iconBtn" title="Ajustes">⚙️</button>
-  </header>
+:root{
+  --bg:#0b1220;
+  --panel:#0f1b33;
+  --panel2:#0d1730;
+  --text:#e7eefc;
+  --muted:#a9b7d6;
+  --accent:#3b82f6;
+  --danger:#ef4444;
+  --border:rgba(255,255,255,.08);
+}
 
-  <main class="wrap">
-    <section id="chat" class="chat" aria-live="polite"></section>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  background:var(--bg);
+  color:var(--text);
+}
 
-    <footer class="composer">
-      <textarea id="input" rows="1" placeholder="Escribí acá…"></textarea>
-      <button id="send" class="sendBtn">Enviar</button>
-    </footer>
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 16px;
+  border-bottom:1px solid var(--border);
+  background:linear-gradient(180deg,var(--panel),transparent);
+}
 
-    <div class="tools">
-      <button id="btnExport" class="smallBtn">Exportar</button>
-      <label class="smallBtn fileLabel">
-        Importar
-        <input id="fileImport" type="file" accept="application/json" hidden />
-      </label>
-      <button id="btnClear" class="smallBtn danger">Borrar chat</button>
-    </div>
-  </main>
+.topbar h1{margin:0;font-size:28px;letter-spacing:.2px}
 
-  <!-- Modal Settings -->
-  <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="modalCard">
-      <div class="modalHead">
-        <h2 id="modalTitle">Settings</h2>
-        <button id="btnClose" class="iconBtn" title="Cerrar">✖</button>
-      </div>
+.wrap{max-width:820px;margin:0 auto;padding:16px}
 
-      <label class="field">
-        <span>AI Provider</span>
-        <select id="provider">
-          <option value="openai">OpenAI</option>
-        </select>
-      </label>
+.chat{
+  min-height:58vh;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  padding:10px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:rgba(255,255,255,.03);
+}
 
-      <label class="field">
-        <span>Modelo</span>
-        <select id="model">
-          <option value="gpt-5-mini">gpt-5-mini</option>
-          <option value="gpt-5">gpt-5</option>
-        </select>
-      </label>
+.msg{
+  padding:12px 14px;
+  border-radius:14px;
+  border:1px solid var(--border);
+  max-width:92%;
+  white-space:pre-wrap;
+  word-wrap:break-word;
+}
 
-      <label class="field">
-        <span>API Key</span>
-        <input id="apiKey" type="password" placeholder="sk-..." autocomplete="off" />
-        <small class="hint">Se guarda en tu navegador (localStorage).</small>
-      </label>
+.msg.user{align-self:flex-end;background:rgba(59,130,246,.14)}
+.msg.assistant{align-self:flex-start;background:rgba(255,255,255,.06)}
+.meta{font-size:12px;color:var(--muted);margin-top:6px}
 
-      <label class="field">
-        <span>System / Instrucciones</span>
-        <textarea id="system" rows="4" placeholder="Cómo debe comportarse Lucy…"></textarea>
-      </label>
+.composer{
+  display:flex;
+  gap:10px;
+  margin-top:12px;
+}
 
-      <div class="row">
-        <label class="check">
-          <input id="store" type="checkbox" />
-          <span>store: true</span>
-        </label>
-        <button id="btnSave" class="sendBtn">Guardar</button>
-      </div>
+#input{
+  flex:1;
+  resize:none;
+  padding:12px 12px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:var(--panel2);
+  color:var(--text);
+  outline:none;
+}
 
-      <small class="hint warn">
-        ⚠️ Si publicás esto en GitHub Pages, tu API Key puede quedar expuesta si compartís el link.
-      </small>
-    </div>
-  </div>
+.sendBtn{
+  padding:12px 14px;
+  border:none;
+  border-radius:12px;
+  background:var(--accent);
+  color:white;
+  font-weight:700;
+}
 
-  <script src="script.js"></script>
-</body>
-</html>
+.iconBtn{
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.06);
+  color:var(--text);
+  border-radius:10px;
+  padding:8px 10px;
+  font-size:16px;
+}
+
+.tools{
+  display:flex;
+  gap:10px;
+  margin-top:12px;
+  flex-wrap:wrap;
+}
+
+.smallBtn{
+  padding:10px 12px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.06);
+  color:var(--text);
+}
+
+.smallBtn.danger{background:rgba(239,68,68,.12); border-color:rgba(239,68,68,.25)}
+.fileLabel{cursor:pointer}
+
+.modal{
+  position:fixed; inset:0;
+  background:rgba(0,0,0,.55);
+  display:flex; align-items:center; justify-content:center;
+  padding:16px;
+}
+
+.hidden{display:none}
+
+.modalCard{
+  width:min(760px, 98vw);
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:14px;
+}
+
+.modalHead{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:8px;
+}
+
+.field{display:flex;flex-direction:column;gap:6px;margin:10px 0}
+.field span{color:var(--muted);font-size:13px}
+
+.field input, .field select, .field textarea{
+  padding:10px 10px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:var(--panel2);
+  color:var(--text);
+  outline:none;
+}
+
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px;flex-wrap:wrap}
+.check{display:flex;align-items:center;gap:8px;color:var(--muted)}
+
+.hint{color:var(--muted);font-size:12px}
+.warn{display:block;margin-top:10px;color:#ffd4a3}
