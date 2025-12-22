@@ -353,3 +353,16 @@ function loadMemory() {
     return [];
   }
 }
+// ===== MODOS DE LUCY =====
+const MODE_PROMPTS = {
+  normal: "Modo NORMAL: respondés claro, directo y práctico.",
+  foco: "Modo FOCO: respuestas cortas, pasos numerados y acción inmediata.",
+  introspectivo: "Modo INTROSPECTIVO: análisis profundo, preguntas y reflexión."
+};
+
+function getSystemPrompt(cfg) {
+  const mode = cfg?.mode || "normal";
+  const extra = MODE_PROMPTS[mode] || MODE_PROMPTS.normal;
+  const base = cfg?.system || "";
+  return `${base}\n\n${extra}`.trim();
+}
