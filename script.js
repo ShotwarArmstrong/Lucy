@@ -1,4 +1,4 @@
-/* Lucy - simple, persistent, GitHub Pages friendly
+del/* Lucy - simple, persistent, GitHub Pages friendly
    WARNING: Putting an API key in client-side JS is unsafe for public links.
 */
 
@@ -14,6 +14,7 @@ const DEFAULT_CFG = {
   system: "Sos Lucy: clara, lógica, directa y segura. Si algo es riesgoso, avisás y proponés alternativa.",
   store: false
 };
+
 
 let state = {
   cfg: loadCfg(),
@@ -310,4 +311,25 @@ function extractOutputText(resp) {
 // --- tiny toast
 function toast(msg) {
   console.log("[Lucy]", msg);
+}
+
+// ===== LUCY MEMORY (localStorage) =====
+
+const LUCY_MEMORY_KEY = "lucy_chat_memory_v1";
+
+function saveMemory(messages) {
+  try {
+    localStorage.setItem(LUCY_MEMORY_KEY, JSON.stringify(messages));
+  } catch (e) {
+    console.warn("Lucy: no se pudo guardar memoria");
+  }
+}
+
+function loadMemory() {
+  try {
+    const data = localStorage.getItem(LUCY_MEMORY_KEY);
+    return data ? JSON.parse(data) : [];
+  } catch (e) {
+    return [];
+  }
 }
