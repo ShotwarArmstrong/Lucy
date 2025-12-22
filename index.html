@@ -1,27 +1,81 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Lucy</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <header class="topbar">
+    <h1>Lucy</h1>
+    <button id="btnSettings" class="iconBtn" title="Ajustes">⚙️</button>
+  </header>
 
-  <div id="app">
-    <header>
-      <h1>Lucy</h1>
-      <button id="settingsBtn">⚙️</button>
-    </header>
+  <main class="wrap">
+    <section id="chat" class="chat" aria-live="polite"></section>
 
-    <main id="chat">
-      <div class="message lucy">Hola. Estoy lista.</div>
-    </main>
-
-    <footer>
-      <input id="input" placeholder="Escribí un mensaje..." />
-      <button id="send">➤</button>
+    <footer class="composer">
+      <textarea id="input" rows="1" placeholder="Escribí acá…"></textarea>
+      <button id="send" class="sendBtn">Enviar</button>
     </footer>
+
+    <div class="tools">
+      <button id="btnExport" class="smallBtn">Exportar</button>
+      <label class="smallBtn fileLabel">
+        Importar
+        <input id="fileImport" type="file" accept="application/json" hidden />
+      </label>
+      <button id="btnClear" class="smallBtn danger">Borrar chat</button>
+    </div>
+  </main>
+
+  <!-- Modal Settings -->
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modalCard">
+      <div class="modalHead">
+        <h2 id="modalTitle">Settings</h2>
+        <button id="btnClose" class="iconBtn" title="Cerrar">✖</button>
+      </div>
+
+      <label class="field">
+        <span>AI Provider</span>
+        <select id="provider">
+          <option value="openai">OpenAI</option>
+        </select>
+      </label>
+
+      <label class="field">
+        <span>Modelo</span>
+        <select id="model">
+          <option value="gpt-5-mini">gpt-5-mini</option>
+          <option value="gpt-5">gpt-5</option>
+        </select>
+      </label>
+
+      <label class="field">
+        <span>API Key</span>
+        <input id="apiKey" type="password" placeholder="sk-..." autocomplete="off" />
+        <small class="hint">Se guarda en tu navegador (localStorage).</small>
+      </label>
+
+      <label class="field">
+        <span>System / Instrucciones</span>
+        <textarea id="system" rows="4" placeholder="Cómo debe comportarse Lucy…"></textarea>
+      </label>
+
+      <div class="row">
+        <label class="check">
+          <input id="store" type="checkbox" />
+          <span>store: true</span>
+        </label>
+        <button id="btnSave" class="sendBtn">Guardar</button>
+      </div>
+
+      <small class="hint warn">
+        ⚠️ Si publicás esto en GitHub Pages, tu API Key puede quedar expuesta si compartís el link.
+      </small>
+    </div>
   </div>
 
   <script src="script.js"></script>
