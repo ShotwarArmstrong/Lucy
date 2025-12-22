@@ -370,3 +370,76 @@ function loadMemory() {
     return [];
   }
 }
+// ===== MODOS DE LUCY =====
+const MODE_PROMPTS = {
+  normal: "Modo NORMAL: respondés claro, directo y práctico.",
+  foco: "Modo FOCO: respuestas cortas, pasos numerados y acción inmediata.",
+  introspectivo: "Modo INTROSPECTIVO: análisis profundo, preguntas y reflexión."
+};
+
+function getSystemPrompt(cfg) {
+  const mode = cfg?.mode || "normal";
+  const extra = MODE_PROMPTS[mode] || MODE_PROMPTS.normal;
+  const base = cfg?.system || "";
+  return `${base}\n\n${extra}`.trim();
+}
+// ===== CONFIGURACIÓN DE LUCY =====
+function loadCfg() {
+  try {
+    const raw = localStorage.getItem(LS.cfg);
+    return raw
+      ? JSON.parse(raw)
+      : {
+          provider: "openai",
+          model: "gpt-5-mini",
+          store: true,
+          system: "",
+          mode: "normal",
+        };
+  } catch (e) {
+    return {
+      provider: "openai",
+      model: "gpt-5-mini",
+      store: true,
+      system: "",
+      mode: "normal",
+    };
+  }
+}
+
+function saveCfg(cfg) {
+  try {
+    localStorage.setItem(LS.cfg, JSON.stringify(cfg));
+  } catch (e) {
+    console.warn("Lucy: no se pudo guardar configuración");
+  }
+}
+// ===== INIT SETTINGS =====
+const cfg = loadCfg();
+
+// referencias a UI
+const modeSelect = document.getElementById("mode");
+const systemInput = document.getElementById("system");
+const storeCheck = document.getElementById("store");
+
+// cargar valores guardados
+if (cfg.mode && modeSelect) modeSelect.value = cfg.mode;
+if (cfg.system && systemInput) systemInput.value = cfg.system;
+if (typeof cfg.store === "boolean" && storeCheck) {
+  storeCheck.checked = cfg.store;
+}
+
+// botón Guardar (settings)
+const btnSave = document.getElementById("btnSave");
+if (btnSave) {
+  btnSave.addEventListener("click", () => {
+    const newCfg = {
+      ...cfg,
+      mode: modeSelect?.value || "normal",
+      system: systemInput?.value || "",
+      store: storeCheck?.checked ?? true,
+    };
+    saveCfg(newCfg);
+    alert("Settings guardados");
+  });
+}
