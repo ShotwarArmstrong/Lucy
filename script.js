@@ -18,7 +18,7 @@ Respondés en español neutro.
 Si no sabes algo, decís que no lo sabés.
 `;
 
-del/* Lucy - simple, persistent, GitHub Pages friendly
+/* Lucy - simple, persistent, GitHub Pages friendly
    WARNING: Putting an API key in client-side JS is unsafe for public links.
 */
 
