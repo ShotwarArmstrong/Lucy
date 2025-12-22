@@ -304,7 +304,7 @@ async function callOpenAI(userText) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${state.cfg.apiKey}`
+      "Authorization": `Bearer ${state.cfg.apiKey}`,
     },
     body: JSON.stringify({
       model: state.cfg.model,
