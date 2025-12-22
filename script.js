@@ -15,6 +15,7 @@ Reglas:
 
 Tu tono es calmo, directo y humano.
 Respondés en español neutro.
+Si no sabes algo, decís que no lo sabés.
 `;
 
 del/* Lucy - simple, persistent, GitHub Pages friendly
