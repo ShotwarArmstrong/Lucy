@@ -366,3 +366,34 @@ function getSystemPrompt(cfg) {
   const base = cfg?.system || "";
   return `${base}\n\n${extra}`.trim();
 }
+// ===== CONFIGURACIÓN DE LUCY =====
+function loadCfg() {
+  try {
+    const raw = localStorage.getItem(LS.cfg);
+    return raw
+      ? JSON.parse(raw)
+      : {
+          provider: "openai",
+          model: "gpt-5-mini",
+          store: true,
+          system: "",
+          mode: "normal",
+        };
+  } catch (e) {
+    return {
+      provider: "openai",
+      model: "gpt-5-mini",
+      store: true,
+      system: "",
+      mode: "normal",
+    };
+  }
+}
+
+function saveCfg(cfg) {
+  try {
+    localStorage.setItem(LS.cfg, JSON.stringify(cfg));
+  } catch (e) {
+    console.warn("Lucy: no se pudo guardar configuración");
+  }
+}
