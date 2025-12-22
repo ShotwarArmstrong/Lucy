@@ -414,3 +414,32 @@ function saveCfg(cfg) {
     console.warn("Lucy: no se pudo guardar configuración");
   }
 }
+// ===== INIT SETTINGS =====
+const cfg = loadCfg();
+
+// referencias a UI
+const modeSelect = document.getElementById("mode");
+const systemInput = document.getElementById("system");
+const storeCheck = document.getElementById("store");
+
+// cargar valores guardados
+if (cfg.mode && modeSelect) modeSelect.value = cfg.mode;
+if (cfg.system && systemInput) systemInput.value = cfg.system;
+if (typeof cfg.store === "boolean" && storeCheck) {
+  storeCheck.checked = cfg.store;
+}
+
+// botón Guardar (settings)
+const btnSave = document.getElementById("btnSave");
+if (btnSave) {
+  btnSave.addEventListener("click", () => {
+    const newCfg = {
+      ...cfg,
+      mode: modeSelect?.value || "normal",
+      system: systemInput?.value || "",
+      store: storeCheck?.checked ?? true,
+    };
+    saveCfg(newCfg);
+    alert("Settings guardados");
+  });
+}
