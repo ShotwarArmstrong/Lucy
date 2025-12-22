@@ -1,55 +1,83 @@
-body {
-  margin: 0;
-  background: #0e1621;
-  color: #e6edf3;
-  font-family: system-ui, sans-serif;
-}
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lucy</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>Lucy</h1>
+    <button id="btnSettings" class="iconBtn" title="Ajustes">⚙️</button>
+  </header>
 
-#app {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-}
+  <main class="wrap">
+    <section id="chat" class="chat" aria-live="polite"></section>
 
-header {
-  padding: 12px;
-  background: #161b22;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+    <footer class="composer">
+      <textarea id="input" rows="1" placeholder="Escribí acá…"></textarea>
+      <button id="send" class="sendBtn">Enviar</button>
+    </footer>
 
-main {
-  flex: 1;
-  padding: 12px;
-  overflow-y: auto;
-}
+    <div class="tools">
+      <button id="btnExport" class="smallBtn">Exportar</button>
+      <label class="smallBtn fileLabel">
+        Importar
+        <input id="fileImport" type="file" accept="application/json" hidden />
+      </label>
+      <button id="btnClear" class="smallBtn danger">Borrar chat</button>
+    </div>
+  </main>
 
-.message {
-  background: #1f2937;
-  padding: 10px;
-  border-radius: 8px;
-  margin-bottom: 8px;
-}
+  <!-- Modal Settings -->
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modalCard">
+      <div class="modalHead">
+        <h2 id="modalTitle">Settings</h2>
+        <button id="btnClose" class="iconBtn" title="Cerrar">✖</button>
+      </div>
 
-footer {
-  display: flex;
-  padding: 10px;
-  gap: 8px;
-  background: #161b22;
-}
+      <label class="field">
+        <span>AI Provider</span>
+        <select id="provider">
+          <option value="openai">OpenAI</option>
+        </select>
+      </label>
 
-input {
-  flex: 1;
-  padding: 10px;
-  border-radius: 6px;
-  border: none;
-}
+      <label class="field">
+        <span>Modelo</span>
+        <select id="model">
+          <option value="gpt-5-mini">gpt-5-mini</option>
+          <option value="gpt-5">gpt-5</option>
+        </select>
+      </label>
 
-button {
-  padding: 10px 14px;
-  border-radius: 6px;
-  border: none;
-  background: #2563eb;
-  color: white;
-}
+      <label class="field">
+        <span>API Key</span>
+        <input id="apiKey" type="password" placeholder="sk-..." autocomplete="off" />
+        <small class="hint">Se guarda en tu navegador (localStorage).</small>
+      </label>
+
+      <label class="field">
+        <span>System / Instrucciones</span>
+        <textarea id="system" rows="4" placeholder="Cómo debe comportarse Lucy…"></textarea>
+      </label>
+
+      <div class="row">
+        <label class="check">
+          <input id="store" type="checkbox" />
+          <span>store: true</span>
+        </label>
+        <button id="btnSave" class="sendBtn">Guardar</button>
+      </div>
+
+      <small class="hint warn">
+        ⚠️ Si publicás esto en GitHub Pages, tu API Key puede quedar expuesta si compartís el link.
+      </small>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
