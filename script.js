@@ -647,15 +647,6 @@ function startLucy() {
   });
 }
 
-const HISTORY_KEY = "lucy_history_v1";
-
-function loadHistory() {
-  const container = document.getElementById("messages");
-  if (!container) return;
-
-  const raw = localStorage.getItem(HISTORY_KEY);
-  if (!raw) return;
-
   try {
     const arr = JSON.parse(raw);
     if (!Array.isArray(arr)) return;
