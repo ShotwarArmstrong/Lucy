@@ -721,4 +721,10 @@ function escapeHtml(s) {
 function stripHtml(s) {
   return String(s).replace(/<[^>]*>/g, "");
 }
+function handleLucyResponse(text, hist) {
+  const reply = `Te leí: "${text}". Decime cómo querés seguir.`;
 
+  renderMsg("assistant", escapeHtml(reply));
+  hist.push({ role: "assistant", text: reply });
+  saveHistory(hist);
+}
