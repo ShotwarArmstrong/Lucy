@@ -725,6 +725,3 @@ function stripHtml(s) {
   return String(s).replace(/<[^>]*>/g, "");
 }
 
-// ============================
-// RESPUESTA DEMO (Baby/Lucy sin IA)
-// ============================
