@@ -44,7 +44,34 @@ function chooseHasIA(hasIA) {
     babyLucyGuide();
   }
 }
+function askForKey() {
+  const chat = document.getElementById("chat");
 
+  chat.innerHTML = `
+    <div class="lucy-message">
+      Perfecto.<br>
+      Pegá tu key de la IA que quieras usar.<br><br>
+      (Lucy no la envía a ningún lado)
+    </div>
+
+    <input id="apiKeyInput" placeholder="pegá tu key acá" />
+    <button onclick="saveKey()">Continuar</button>
+  `;
+}
+
+function saveKey() {
+  const key = document.getElementById("apiKeyInput").value.trim();
+
+  if (!key) {
+    alert("Pegá una key válida");
+    return;
+  }
+
+  lucyState.apiKey = key;
+  lucyState.mode = "lucy";
+
+  askUserProfile();
+}
 let lucyState = {
   initialized: false,
   name: "",
