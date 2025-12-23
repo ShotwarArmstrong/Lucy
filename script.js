@@ -618,14 +618,33 @@ function saveContext() {
 
 function startLucy() {
   const chat = document.getElementById("chat");
+
   chat.innerHTML = `
     <div class="lucy-message">
-      Hola ${lucyState.name}.<br><br>
+      Hola <b>${lucyState.name || "Usuario"}</b>.<br>
       Ya sé desde dónde venís.<br>
       Voy a adaptarme a vos.<br><br>
-      Cuando quieras, empezamos.
+      <b>Modo:</b> ${String(lucyState.mode || "lucy").toUpperCase()}<br>
+      <b>Rol:</b> ${lucyState.role || "Explorador"}<br><br>
+      Decime algo para empezar 👇
+    </div>
+
+    <div id="messages"></div>
+
+    <div class="chatbar">
+      <input id="chatInput" placeholder="Escribí acá..." autocomplete="off" />
+      <button id="sendBtn">Enviar</button>
     </div>
   `;
+
+  // cargar historial si existe
+  loadHistory();
+
+  // enganchar eventos
+  document.getElementById("sendBtn").addEventListener("click", onSend);
+  document.getElementById("chatInput").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") onSend();
+  });
 }
 
 // ==============================
