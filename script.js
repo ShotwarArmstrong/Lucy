@@ -677,16 +677,14 @@ function getHistory() {
     return [];
   }
 }
-
-function loadHistory() {
+function getHistory() {
   try {
-    const container = document.getElementById("messages");
-    if (!container) return;
-
-    const hist = getHistory();
-    hist.forEach(m => renderMsg(m.role, m.text));
+    const raw = localStorage.getItem(HISTORY_KEY);
+    if (!raw) return [];
+    const arr = JSON.parse(raw);
+    return Array.isArray(arr) ? arr : [];
   } catch (e) {
-    console.log("loadHistory error:", e);
+    return [];
   }
 }
 function loadHistory() {
@@ -702,7 +700,6 @@ function saveHistory(arr) {
   localStorage.setItem(HISTORY_KEY, JSON.stringify(arr));
 }
 
-function getHistory() {
   
 }
 
