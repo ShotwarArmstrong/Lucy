@@ -693,7 +693,6 @@ function renderMsg(role, text) {
   // bajar al final
   container.scrollTop = container.scrollHeight;
 }
-
 async function onSend() {
   const input = document.getElementById("chatInput");
   if (!input) return;
@@ -709,7 +708,11 @@ async function onSend() {
   hist.push({ role: "user", text });
   saveHistory(hist);
 
-
+  // Lucy -> respuesta placeholder (flujo real comienza acá)
+  const lucyReply = "Te leí. Estoy procesando lo que me dijiste.";
+  renderMsg("assistant", lucyReply);
+  hist.push({ role: "assistant", text: lucyReply });
+  saveHistory(hist);
 }
 
 function escapeHtml(s) {
