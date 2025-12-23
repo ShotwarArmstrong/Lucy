@@ -709,12 +709,7 @@ async function onSend() {
   hist.push({ role: "user", text });
   saveHistory(hist);
 
-  // respuesta lucy (demo por ahora)
-  const reply = await lucyDemoReply(text);
 
-  renderMsg("assistant", reply);
-  hist.push({ role: "assistant", text: stripHtml(reply) });
-  saveHistory(hist);
 }
 
 function escapeHtml(s) {
