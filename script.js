@@ -658,6 +658,37 @@ function startLucy() {
 }
 const HISTORY_KEY = "lucy_history_v1";
 
+function saveHistory(arr) {
+  try {
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(arr));
+  } catch (e) {
+    console.log("saveHistory error:", e);
+  }
+}
+
+function getHistory() {
+  try {
+    const raw = localStorage.getItem(HISTORY_KEY);
+    if (!raw) return [];
+    const arr = JSON.parse(raw);
+    return Array.isArray(arr) ? arr : [];
+  } catch (e) {
+    console.log("getHistory error:", e);
+    return [];
+  }
+}
+
+function loadHistory() {
+  try {
+    const container = document.getElementById("messages");
+    if (!container) return;
+
+    const hist = getHistory();
+    hist.forEach(m => renderMsg(m.role, m.text));
+  } catch (e) {
+    console.log("loadHistory error:", e);
+  }
+}
 function loadHistory() {
   const container = document.getElementById("messages");
   if (!container) return;
