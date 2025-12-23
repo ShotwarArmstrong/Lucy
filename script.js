@@ -748,23 +748,3 @@ async function lucyDemoReply(userText) {
   // Si hay key, seguimos en modo “Lucy”, pero aún sin llamar API (prueba UX)
   // Esto simula coherencia y “tono Lucy”, sin gastar un peso.
   const t = userText.toLowerCase();
-
-  if (t.includes("hola") || t.includes("buenas")) {
-    return `Hola. Estoy activa. ¿Qué querés lograr hoy?`;
-  }
-
-  if (t.includes("proyecto")) {
-    return `Perfecto. Decime: ¿cuál es el objetivo, el límite (tiempo/dinero) y el siguiente paso que querés ejecutar?`;
-  }
-
-  if (t.includes("key") || t.includes("api")) {
-    return `Si pegaste una key pero no responde, puede ser por saldo/cuota. Cuando enchufemos la API te muestro el motivo exacto del error.`;
-  }
-
-  return `Te leí. Ahora elegí: ¿querés que lo ordene, que lo convierta en plan, o que lo traduzca a acciones concretas?`;
-}
-// ==============================
-// INICIO AUTOMÁTICO
-// ==============================
-
-document.addEventListener("DOMContentLoaded", showWelcome);
