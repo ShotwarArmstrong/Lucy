@@ -647,6 +647,121 @@ function startLucy() {
   });
 }
 
+const HISTORY_KEY = "lucy_history_v1";
+
+function loadHistory() {
+  const container = document.getElementById("messages");
+  if (!container) return;
+
+  const raw = localStorage.getItem(HISTORY_KEY);
+  if (!raw) return;
+
+  try {
+    const arr = JSON.parse(raw);
+    if (!Array.isArray(arr)) return;
+
+    arr.forEach((m) => {
+      renderMsg(m.role, m.text);
+    });
+  } catch (_) {}
+}
+
+function saveHistory(arr) {
+  localStorage.setItem(HISTORY_KEY, JSON.stringify(arr));
+}
+
+function getHistory() {
+  try {
+    const raw = localStorage.getItem(HISTORY_KEY);
+    const arr = raw ? JSON.parse(raw) : [];
+    return Array.isArray(arr) ? arr : [];
+  } catch (_) {
+    return [];
+  }
+}
+
+function renderMsg(role, text) {
+  const container = document.getElementById("messages");
+  if (!container) return;
+
+  const div = document.createElement("div");
+  div.className = role === "user" ? "user-message" : "lucy-message";
+  div.innerHTML = text;
+  container.appendChild(div);
+
+  // bajar al final
+  container.scrollTop = container.scrollHeight;
+}
+
+async function onSend() {
+  const input = document.getElementById("chatInput");
+  if (!input) return;
+
+  const text = input.value.trim();
+  if (!text) return;
+
+  input.value = "";
+
+  // usuario -> pantalla + historial
+  renderMsg("user", escapeHtml(text));
+  const hist = getHistory();
+  hist.push({ role: "user", text });
+  saveHistory(hist);
+
+  // respuesta lucy (demo por ahora)
+  const reply = await lucyDemoReply(text);
+
+  renderMsg("assistant", reply);
+  hist.push({ role: "assistant", text: stripHtml(reply) });
+  saveHistory(hist);
+}
+
+function escapeHtml(s) {
+  return s
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function stripHtml(s) {
+  return String(s).replace(/<[^>]*>/g, "");
+}
+
+// ============================
+// RESPUESTA DEMO (Baby/Lucy sin IA)
+// ============================
+async function lucyDemoReply(userText) {
+  // si no hay key, Lucy se vuelve Baby Lucy automáticamente
+  const hasKey = !!(lucyState.apiKey && String(lucyState.apiKey).trim().length > 10);
+
+  if (!hasKey) {
+    return `
+      <b>Baby Lucy:</b> todavía no hay IA conectada.<br>
+      Si querés potencia real, pegá una key en el flujo inicial.<br><br>
+      Mientras tanto, puedo guiarte: ¿querés <b>crear</b>, <b>programar</b> o <b>charlar</b>?
+    `;
+  }
+
+  // Si hay key, seguimos en modo “Lucy”, pero aún sin llamar API (prueba UX)
+  // Esto simula coherencia y “tono Lucy”, sin gastar un peso.
+  const t = userText.toLowerCase();
+
+  if (t.includes("hola") || t.includes("buenas")) {
+    return `Hola. Estoy activa. ¿Qué querés lograr hoy?`;
+  }
+
+  if (t.includes("proyecto")) {
+    return `Perfecto. Decime: ¿cuál es el objetivo, el límite (tiempo/dinero) y el siguiente paso que querés ejecutar?`;
+  }
+
+  if (t.includes("key") || t.includes("api")) {
+    return `Si pegaste una key pero no responde, puede ser por saldo/cuota. Cuando enchufemos la API te muestro el motivo exacto del error.`;
+  }
+
+  return `Te leí. Ahora elegí: ¿querés que lo ordene, que lo convierta en plan, o que lo traduzca a acciones concretas?`;
+}
 // ==============================
 // INICIO AUTOMÁTICO
 // ==============================
