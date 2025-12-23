@@ -468,3 +468,14 @@ function toggleCreatorName(value) {
   const input = document.getElementById("creatorNameInput");
   input.style.display = value === "yes" ? "block" : "none";
 }
+
+function saveContext() {
+  lucyState.name = document.getElementById("nameInput").value;
+  lucyState.role = document.getElementById("roleInput").value;
+  lucyState.creator = document.getElementById("creatorInput").value === "yes";
+  lucyState.creatorName = document.getElementById("creatorNameInput").value;
+  lucyState.initialized = true;
+
+  localStorage.setItem("lucyState", JSON.stringify(lucyState));
+  startLucy();
+}
