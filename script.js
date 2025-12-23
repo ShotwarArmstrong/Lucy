@@ -721,18 +721,3 @@ function escapeHtml(s) {
 function stripHtml(s) {
   return String(s).replace(/<[^>]*>/g, "");
 }
-const t = text.toLowerCase();
-
-let reply = "Te leí. Decime cómo querés seguir.";
-
-if (t.includes("crear")) {
-  reply = "Perfecto. ¿Qué querés crear?";
-} else if (t.includes("plan")) {
-  reply = "Bien. Armemos un plan. ¿Cuál es el objetivo?";
-} else if (t.includes("charlar")) {
-  reply = "Dale. Estoy acá. ¿De qué querés hablar?";
-}
-
-renderMsg("assistant", escapeHtml(reply));
-hist.push({ role: "assistant", text: reply });
-saveHistory(hist);
