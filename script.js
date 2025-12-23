@@ -24,7 +24,8 @@ function showWelcome() {
     <div class="lucy-message">
       👋 Hola. Soy <b>Lucy</b>.<br><br>
       No soy una inteligencia artificial.<br>
-      Soy una <b>guía</b> para que uses la que elijas.<br><br>
+      Soy una <b>guía</
+b> para que uses la que elijas.<br><br>
       Antes de empezar, decime:
     </div>
 
