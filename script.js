@@ -733,18 +733,3 @@ function stripHtml(s) {
 // ============================
 // RESPUESTA DEMO (Baby/Lucy sin IA)
 // ============================
-async function lucyDemoReply(userText) {
-  // si no hay key, Lucy se vuelve Baby Lucy automáticamente
-  const hasKey = !!(lucyState.apiKey && String(lucyState.apiKey).trim().length > 10);
-
-  if (!hasKey) {
-    return `
-      <b>Baby Lucy:</b> todavía no hay IA conectada.<br>
-      Si querés potencia real, pegá una key en el flujo inicial.<br><br>
-      Mientras tanto, puedo guiarte: ¿querés <b>crear</b>, <b>programar</b> o <b>charlar</b>?
-    `;
-  }
-
-  // Si hay key, seguimos en modo “Lucy”, pero aún sin llamar API (prueba UX)
-  // Esto simula coherencia y “tono Lucy”, sin gastar un peso.
-  const t = userText.toLowerCase();
