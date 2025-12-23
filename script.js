@@ -60,22 +60,19 @@ function babyLucyGuide() {
     <button onclick="showIAOptions('charla')">💬 Pensar / charlar</button>
   `;
 }
-function showIAOptions(profile) {
-  const chat = document.getElementById("chat");
+chat.innerHTML = `
+  <div class="lucy-message">
+    Según lo que buscás, estas IAs encajan mejor:<br><br>
 
-  chat.innerHTML = `
-    <div class="lucy-message">
-      Según lo que buscás, estas IAs encajan mejor:<br><br>
+    • OpenAI — lógica y estructura<br>
+    • Gemini — creatividad y fluidez<br>
+    • Claude — análisis y contexto largo<br><br>
 
-      • OpenAI – lógica y estructura<br>
-      • Gemini – creatividad y fluidez<br>
-      • Claude – análisis y contexto largo<br><br> 
+    Elegí cualquiera. Lucy se adapta.
+  </div>
 
-      Elegí cualquiera. Lucy se adapta.
-    </div>
-
-    <button onclick="askForKey()">🔑 Ya tengo una key</button>
-  `;
+  <button onclick="askForKey()">🔑 Ya tengo una key</button>
+`;
 }
 
 function askForKey() {
