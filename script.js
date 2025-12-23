@@ -69,7 +69,7 @@ function showIAOptions(profile) {
 
       • OpenAI – lógica y estructura<br>
       • Gemini – creatividad y fluidez<br>
-      • Claude – análisis y contexto largo<br><br>
+      • Claude – análisis y contexto largo<br><br> 
 
       Elegí cualquiera. Lucy se adapta.
     </div>
