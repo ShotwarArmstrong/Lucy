@@ -479,3 +479,15 @@ function saveContext() {
   localStorage.setItem("lucyState", JSON.stringify(lucyState));
   startLucy();
 }
+
+function startLucy() {
+  const chat = document.getElementById("chat");
+  chat.innerHTML = `
+    <div class="lucy-message">
+      Hola ${lucyState.name}.<br><br>
+      Ya sé desde dónde venís.<br>
+      Voy a adaptarme a vos.<br><br>
+      Cuando quieras, empezamos.
+    </div>
+  `;
+}
