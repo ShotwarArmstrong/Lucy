@@ -708,12 +708,7 @@ async function onSend() {
   hist.push({ role: "user", text });
   saveHistory(hist);
 
-  const lucyReply = "Te leí. Estoy procesando lo que me dijiste.";
-  renderMsg("assistant", lucyReply);
-  hist.push({ role: "assistant", text: lucyReply });
-  saveHistory(hist);
-}
-
+  
 function escapeHtml(s) {
   return s
     .replaceAll("&", "&amp;")
