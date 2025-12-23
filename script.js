@@ -647,15 +647,7 @@ function startLucy() {
   });
 }
 
-  try {
-    const arr = JSON.parse(raw);
-    if (!Array.isArray(arr)) return;
 
-    arr.forEach((m) => {
-      renderMsg(m.role, m.text);
-    });
-  } catch (_) {}
-}
 const HISTORY_KEY = "lucy_history_v1";
 
 function saveHistory(arr) {
@@ -666,16 +658,7 @@ function saveHistory(arr) {
   }
 }
 
-function getHistory() {
-  try {
-    const raw = localStorage.getItem(HISTORY_KEY);
-    if (!raw) return [];
-    const arr = JSON.parse(raw);
-    return Array.isArray(arr) ? arr : [];
-  } catch (e) {
-    console.log("getHistory error:", e);
-    return [];
-  }
+
 }
 function getHistory() {
   try {
@@ -688,21 +671,16 @@ function getHistory() {
   }
 }
 function loadHistory() {
-  const container = document.getElementById("messages");
-  if (!container) return;
+  try {
+    const container = document.getElementById("messages");
+    if (!container) return;
 
-  const raw = localStorage.getItem(HISTORY_KEY);
-  if (!raw) return;
-
-  
+    const hist = getHistory();
+    hist.forEach(m => renderMsg(m.role, m.text));
+  } catch (e) {
+    console.log("loadHistory error:", e);
+  }
 }
-function saveHistory(arr) {
-  localStorage.setItem(HISTORY_KEY, JSON.stringify(arr));
-}
-
-  
-}
-
 function renderMsg(role, text) {
   const container = document.getElementById("messages");
   if (!container) return;
