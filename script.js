@@ -402,3 +402,28 @@ function getSystemPrompt(cfg) {
   const base = cfg?.system || "";
   return `${base}\n\n${extra}`.trim();
 }
+
+window.onload = () => {
+  const savedState = localStorage.getItem("lucyState");
+  if (savedState) {
+    lucyState = JSON.parse(savedState);
+    startLucy();
+  } else {
+    showWelcome();
+  }
+};
+
+function showWelcome() {
+  const chat = document.getElementById("chat");
+  chat.innerHTML = `
+    <div class="lucy-message">
+      Hola. Soy Lucy.<br><br>
+      No soy una inteligencia artificial peligrosa.<br>
+      No tomo decisiones por vos.<br>
+      No te analizo.<br><br>
+      Te acompaño.<br><br>
+      Para empezar, necesito ubicarte.
+    </div>
+    <button onclick="showContextForm()">Continuar</button>
+  `;
+}
