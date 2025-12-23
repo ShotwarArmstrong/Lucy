@@ -13,6 +13,26 @@ let lucyState = {
   apiKey: null
 };
 
+// ==============================
+// BIENVENIDA BABY LUCY
+// ==============================
+
+function showWelcome() {
+  const chat = document.getElementById("chat");
+
+  chat.innerHTML = `
+    <div class="lucy-message">
+      👋 Hola. Soy <b>Lucy</b>.<br><br>
+      No soy una inteligencia artificial.<br>
+      Soy una <b>guía</b> para que uses la que elijas.<br><br>
+
+      Antes de empezar, decime:
+    </div>
+
+    <button onclick="chooseHasIA(true)">🔑 Ya tengo una IA</button>
+    <button onclick="chooseHasIA(false)">🧭 No tengo IA (guíame)</button>
+  `;
+}
 
 let lucyState = {
   initialized: false,
