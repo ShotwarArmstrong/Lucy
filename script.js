@@ -109,13 +109,6 @@ function enterLucy() {
   `;
 }
 
-let lucyState = {
-  initialized: false,
-  name: "",
-  role: "",
-  creator: false,
-  creatorName: ""
-};
 
 const LUCY_CORE = `
 Sos Lucy.
