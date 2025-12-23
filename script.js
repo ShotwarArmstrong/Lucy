@@ -662,13 +662,7 @@ function saveHistory(arr) {
 }
 
 function getHistory() {
-  try {
-    const raw = localStorage.getItem(HISTORY_KEY);
-    const arr = raw ? JSON.parse(raw) : [];
-    return Array.isArray(arr) ? arr : [];
-  } catch (_) {
-    return [];
-  }
+  
 }
 
 function renderMsg(role, text) {
