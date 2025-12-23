@@ -72,6 +72,27 @@ function saveKey() {
 
   askUserProfile();
 }
+function askUserProfile() {
+  const chat = document.getElementById("chat");
+
+  chat.innerHTML = `
+    <div class="lucy-message">
+      Bien.<br>
+      Antes de empezar, necesito conocerte.
+    </div>
+
+    <input id="userName" placeholder="¿Cómo te llamás?" />
+    <input id="userRole" placeholder="¿A qué te dedicás?" />
+    <button onclick="saveUserProfile()">Entrar a Lucy</button>
+  `;
+}
+
+function saveUserProfile() {
+  lucyState.user.name = document.getElementById("userName").value || "Usuario";
+  lucyState.user.role = document.getElementById("userRole").value || "Explorador";
+
+  enterLucy();
+}
 let lucyState = {
   initialized: false,
   name: "",
