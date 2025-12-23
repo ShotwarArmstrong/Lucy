@@ -696,14 +696,7 @@ function loadHistory() {
   const raw = localStorage.getItem(HISTORY_KEY);
   if (!raw) return;
 
-  try {
-    const arr = JSON.parse(raw);
-    if (!Array.isArray(arr)) return;
-
-    arr.forEach((m) => {
-      renderMsg(m.role, m.text);
-    });
-  } catch (_) {}
+  
 }
 function saveHistory(arr) {
   localStorage.setItem(HISTORY_KEY, JSON.stringify(arr));
