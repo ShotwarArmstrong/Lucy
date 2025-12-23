@@ -708,7 +708,6 @@ async function onSend() {
   hist.push({ role: "user", text });
   saveHistory(hist);
 
-  // Lucy -> respuesta placeholder (flujo real comienza acá)
   const lucyReply = "Te leí. Estoy procesando lo que me dijiste.";
   renderMsg("assistant", lucyReply);
   hist.push({ role: "assistant", text: lucyReply });
