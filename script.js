@@ -44,6 +44,23 @@ function chooseHasIA(hasIA) {
     babyLucyGuide();
   }
 }
+function babyLucyGuide() {
+  const chat = document.getElementById("chat");
+
+  chat.innerHTML = `
+    <div class="lucy-message">
+      Está bien. Empezamos despacio. 🌱<br><br>
+      Baby Lucy no responde como una IA.<br>
+      Te ayuda a entenderlas y elegir.<br><br>
+
+      ¿Qué buscás principalmente?
+    </div>
+
+    <button onclick="showIAOptions('creativo')">🎨 Crear / imaginar</button>
+    <button onclick="showIAOptions('tecnico')">🛠️ Resolver / programar</button>
+    <button onclick="showIAOptions('charla')">💬 Pensar / charlar</button>
+  `;
+}
 function askForKey() {
   const chat = document.getElementById("chat");
 
