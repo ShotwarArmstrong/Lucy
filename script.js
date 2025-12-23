@@ -33,6 +33,17 @@ function showWelcome() {
     <button onclick="chooseHasIA(false)">🧭 No tengo IA (guíame)</button>
   `;
 }
+// ==============================
+// ELECCIÓN DE CAMINO
+// ==============================
+
+function chooseHasIA(hasIA) {
+  if (hasIA) {
+    askForKey();
+  } else {
+    babyLucyGuide();
+  }
+}
 
 let lucyState = {
   initialized: false,
