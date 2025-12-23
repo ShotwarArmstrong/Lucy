@@ -13,6 +13,7 @@ let lucyState = {
   apiKey: null
 };
 
+
 let lucyState = {
   initialized: false,
   name: "",
