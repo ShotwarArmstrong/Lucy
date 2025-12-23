@@ -602,3 +602,9 @@ function startLucy() {
     </div>
   `;
 }
+
+// ==============================
+// INICIO AUTOMÁTICO
+// ==============================
+
+document.addEventListener("DOMContentLoaded", showWelcome);
