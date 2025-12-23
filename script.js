@@ -1,3 +1,18 @@
+// ==============================
+// ESTADO GLOBAL DE LUCY
+// ==============================
+
+let lucyState = {
+  mode: "baby", // baby | lucy | absolute
+  user: {
+    name: null,
+    role: null,
+    creator: false
+  },
+  provider: null, // openai | gemini | claude | etc
+  apiKey: null
+};
+
 let lucyState = {
   initialized: false,
   name: "",
