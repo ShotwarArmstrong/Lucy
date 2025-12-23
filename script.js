@@ -427,3 +427,40 @@ function showWelcome() {
     <button onclick="showContextForm()">Continuar</button>
   `;
 }
+
+function showContextForm() {
+  const chat = document.getElementById("chat");
+  chat.innerHTML = `
+    <div class="lucy-message">
+      ¿Cómo te llamás?
+      <input id="nameInput" placeholder="Tu nombre o alias" />
+      
+      <br><br>
+      ¿A qué te dedicás?
+      <select id="roleInput">
+        <option value="">Elegí una opción</option>
+        <option>Gamer</option>
+        <option>Creador de contenido</option>
+        <option>Estudiante</option>
+        <option>Técnico</option>
+        <option>Artista</option>
+        <option>Ingeniero / Dev</option>
+        <option>Emprendedor</option>
+        <option>Otro</option>
+      </select>
+
+      <br><br>
+      ¿Creás contenido?
+      <select id="creatorInput" onchange="toggleCreatorName(this.value)">
+        <option value="no">No</option>
+        <option value="yes">Sí</option>
+      </select>
+
+      <input id="creatorNameInput" placeholder="Tu nombre de creador" style="display:none;" />
+
+      <br><br>
+      <button onclick="saveContext()">Continuar</button>
+    </div>
+  `;
+}
+
