@@ -464,3 +464,7 @@ function showContextForm() {
   `;
 }
 
+function toggleCreatorName(value) {
+  const input = document.getElementById("creatorNameInput");
+  input.style.display = value === "yes" ? "block" : "none";
+}
