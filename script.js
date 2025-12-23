@@ -93,6 +93,22 @@ function saveUserProfile() {
 
   enterLucy();
 }
+function enterLucy() {
+  const chat = document.getElementById("chat");
+
+  chat.innerHTML = `
+    <div class="lucy-message">
+      Bienvenido, <b>${lucyState.user.name}</b>.<br>
+      Lucy está activa.<br><br>
+
+      Modo: <b>${lucyState.mode.toUpperCase()}</b><br>
+      Rol detectado: <b>${lucyState.user.role}</b><br><br>
+
+      Tocá todo. Explorá. Lucy te acompaña.
+    </div>
+  `;
+}
+
 let lucyState = {
   initialized: false,
   name: "",
