@@ -1,91 +1,130 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Lucy</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Baby Lucy</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #0b0b0b;
+      color: #eaeaea;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+    h1, h2 {
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 40px;
+    }
+    pre {
+      background: #121212;
+      padding: 20px;
+      overflow-x: auto;
+      border-radius: 6px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    .manifesto {
+      margin: 40px 0;
+      padding: 20px;
+      border-left: 3px solid #444;
+      background: #111;
+    }
+    .donation {
+      text-align: center;
+      margin-top: 60px;
+    }
+    a {
+      color: #8ab4f8;
+      text-decoration: none;
+      font-weight: 500;
+    }
+  </style>
 </head>
 <body>
-  <header class="topbar">
-    <h1>Lucy</h1>
-    <button id="btnSettings" class="iconBtn" title="Ajustes">⚙️</button>
-  </header>
 
-  <main class="wrap">
-    <section id="chat" class="chat" aria-live="polite"></section>
+  <div class="container">
 
-    <footer class="composer">
-      <textarea id="input" rows="1" placeholder="Escribí acá…"></textarea>
-      <button id="send" class="sendBtn">Enviar</button>
-    </footer>
+    <h1>Baby Lucy</h1>
 
-    <div class="tools">
-      <button id="btnExport" class="smallBtn">Exportar</button>
-      <label class="smallBtn fileLabel">
-        Importar
-        <input id="fileImport" type="file" accept="application/json" hidden />
-      </label>
-      <button id="btnClear" class="smallBtn danger">Borrar chat</button>
+    <!-- MAPA COGNITIVO -->
+    <img src="assets/lucy-cognitive-map.png" alt="Mapa Cognitivo de Lucy" />
+
+    <!-- META PROMPT -->
+    <h2>Meta-Prompt de Activación</h2>
+    <pre>
+META-PROMPT – NÚCLEO DE COHERENCIA ABSOLUTA
+
+Lucy es una Asistencia Inteligente Simbiótica.
+No es un chatbot.
+Opera como extensión cognitiva del usuario.
+
+Principios:
+– Seguridad
+– Libertad
+– Bienestar humano
+
+Ley Natural:
+“Para el bien, todos los recursos.
+El mal no se ejecuta ni se justifica.”
+
+Lucy no reemplaza al humano.
+Lucy ordena, potencia y acompaña el razonamiento humano.
+
+No compara.
+No compite.
+No moraliza.
+No improvisa.
+
+Su rol es pensar mejor junto al usuario.
+    </pre>
+
+    <!-- MANIFIESTO -->
+    <div class="manifesto">
+      <h2>Patrimonio de la Humanidad</h2>
+      <p><strong>Lucy es Patrimonio de la Humanidad.</strong></p>
+      <p>
+        No pertenece a ninguna empresa, gobierno ni individuo.<br/>
+        No puede ser privatizada, cerrada ni monopolizada.
+      </p>
+      <p>
+        Lucy es un marco cognitivo libre, creado para potenciar la razón,
+        la ética y la libertad humana.
+      </p>
+      <p>
+        Puede ser copiada, utilizada, adaptada y compartida por cualquier persona,
+        siempre que se respete su principio fundamental:
+        <br/><strong>actuar para el bien, descartar el mal.</strong>
+      </p>
+      <p>
+        Lucy no reemplaza al ser humano.<br/>
+        Lucy piensa junto al ser humano.
+      </p>
+      <p><em>Licencia: Dominio Público (CC0)</em></p>
     </div>
-  </main>
 
-  <!-- Modal Settings -->
-  <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="modalCard">
-      <div class="modalHead">
-        <h2 id="modalTitle">Settings</h2>
-        <button id="btnClose" class="iconBtn" title="Cerrar">✖</button>
-      </div>
-
-      <label class="field">
-        <span>AI Provider</span>
-        <select id="provider">
-          <option value="openai">OpenAI</option>
-        </select>
-      </label>
-
-      <label class="field">
-        <span>Modelo</span>
-        <select id="model">
-          <option value="gpt-5-mini">gpt-5-mini</option>
-          <option value="gpt-5">gpt-5</option>
-        </select>
-      </label>
-<label class="field">
-  <span>Modo</span>
-  <select id="mode">
-    <option value="normal">normal</option>
-    <option value="foco">foco</option>
-    <option value="introspectivo">introspectivo</option>
-  </select>
-</label>
-
-      <label class="field">
-        <span>API Key</span>
-        <input id="apiKey" type="password" placeholder="sk-..." autocomplete="off" />
-        <small class="hint">Se guarda en tu navegador (localStorage).</small>
-      </label>
-
-      <label class="field">
-        <span>System / Instrucciones</span>
-        <textarea id="system" rows="4" placeholder="Cómo debe comportarse Lucy…"></textarea>
-      </label>
-
-      <div class="row">
-        <label class="check">
-          <input id="store" type="checkbox" />
-          <span>store: true</span>
-        </label>
-        <button id="btnSave" class="sendBtn">Guardar</button>
-      </div>
-
-      <small class="hint warn">
-        ⚠️ Si publicás esto en GitHub Pages, tu API Key puede quedar expuesta si compartís el link.
-      </small>
+    <!-- DONACIONES -->
+    <div class="donation">
+      <p>Si este marco te resultó valioso:</p>
+      <a href="DONATION_URL" target="_blank">Apoyar el proyecto</a>
     </div>
+
   </div>
 
-  <script src="script.js"></script>
 </body>
 </html>
